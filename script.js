@@ -159,9 +159,44 @@ document.querySelectorAll('.gallery-img').forEach(img => {
     });
 });
 
+
+
+
 // כאשר לוחצים על ה-X, המודאל נסגר
 var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
     modal.style.display = "none";
 }
 
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// בוחרת את 6 התמונות הראשונות לאחר השאפל
+function loadShuffledImages() {
+    var shuffledImages = shuffle(images.slice()).slice(0, 6);
+    var gallery = document.querySelector('.gallery');
+    gallery.innerHTML = ''; // מרוקנת את הגלריה מהתמונות הקודמות
+
+    shuffledImages.forEach(function(src) {
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = "image description";
+        img.className = 'gallery-img';
+        gallery.appendChild(img);
+
+        // הוספת אירוע לחיצה על המודאל
+        img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        };
+    });
+}
+
+// כאשר הדף נטען, הפונקציה רצה ומעמיסה את התמונות
+window.onload = loadShuffledImages;
