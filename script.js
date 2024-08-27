@@ -159,9 +159,6 @@ document.querySelectorAll('.gallery-img').forEach(img => {
     });
 });
 
-
-
-
 // כאשר לוחצים על ה-X, המודאל נסגר
 var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
